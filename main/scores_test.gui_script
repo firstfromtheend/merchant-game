@@ -89,35 +89,63 @@ local function on_animate_done(self, node)
 	)
 end
 
-function close_upgrade_menu()
-	for i = 1, #data.opened_menu do
-		data.opened_menu[i] = false
+function close_upgrade_menu(self, action)
+	if gui.pick_node(gui.get_node('close_upgrade_menu'), action.x, action.y) then
+		gui.set_enabled(self.upgrade_menu_node, false)
+		for i = 1, #data.opened_menu do
+			data.opened_menu[i] = false
+		end
+	end
+end
+
+function check_shop_button(self, action)
+	for i = 1, #self.building_buttons_list do
+		if gui.pick_node(gui.get_node(self.building_buttons_list[i]), action.x, action.y) then
+
+			for i = 1, #self.building_buttons_list do
+				data.opened_menu[self.building_buttons_list[i]] = false
+			end
+			data.opened_menu[self.building_buttons_list[i]] = true
+			
+			gui.set_enabled(self.upgrade_menu_node, true)
+			local upgrades_data = data.get_upgrades_button_data(self.building_buttons_list[i])
+			for j = 1, upgrades_data['upgrade_counter'] do
+				data.opened_menu[self.building_buttons_list[i]] = true
+				local text = upgrades_data['upgrade_'..j].name .. '\n' .. 
+				'уровень = ' .. upgrades_data['upgrade_'..j].level .. '\n' .. 
+				'цена = ' .. upgrades_data['upgrade_'..j].current_cost .. '\n' .. 
+				'доход = ' .. upgrades_data['upgrade_'..j].current_points_to_add
+				gui.set_text(self.upgrade_buttons_list[j], text)
+			end
+		end
 	end
 end
 
 function on_input(self, action_id, action)
 	if action_id == hash('touch') and action.pressed then
+		check_shop_button(self, action)
+		close_upgrade_menu(self, action)
 
-		for i = 1, #self.building_buttons_list do
-			if gui.pick_node(gui.get_node(self.building_buttons_list[i]), action.x, action.y) then
+		-- for i = 1, #self.building_buttons_list do
+		-- 	if gui.pick_node(gui.get_node(self.building_buttons_list[i]), action.x, action.y) then
 
-				for i = 1, #self.building_buttons_list do
-					data.opened_menu[self.building_buttons_list[i]] = false
-				end
-				data.opened_menu[self.building_buttons_list[i]] = true
+		-- 		for i = 1, #self.building_buttons_list do
+		-- 			data.opened_menu[self.building_buttons_list[i]] = false
+		-- 		end
+		-- 		data.opened_menu[self.building_buttons_list[i]] = true
 				
-				gui.set_enabled(self.upgrade_menu_node, true)
-				local upgrades_data = data.get_upgrades_button_data(self.building_buttons_list[i])
-				for j = 1, upgrades_data['upgrade_counter'] do
-					data.opened_menu[self.building_buttons_list[i]] = true
-					local text = upgrades_data['upgrade_'..j].name .. '\n' .. 
-					'уровень = ' .. upgrades_data['upgrade_'..j].level .. '\n' .. 
-					'цена = ' .. upgrades_data['upgrade_'..j].current_cost .. '\n' .. 
-					'доход = ' .. upgrades_data['upgrade_'..j].current_points_to_add
-					gui.set_text(self.upgrade_buttons_list[j], text)
-				end
-			end
-		end
+		-- 		gui.set_enabled(self.upgrade_menu_node, true)
+		-- 		local upgrades_data = data.get_upgrades_button_data(self.building_buttons_list[i])
+		-- 		for j = 1, upgrades_data['upgrade_counter'] do
+		-- 			data.opened_menu[self.building_buttons_list[i]] = true
+		-- 			local text = upgrades_data['upgrade_'..j].name .. '\n' .. 
+		-- 			'уровень = ' .. upgrades_data['upgrade_'..j].level .. '\n' .. 
+		-- 			'цена = ' .. upgrades_data['upgrade_'..j].current_cost .. '\n' .. 
+		-- 			'доход = ' .. upgrades_data['upgrade_'..j].current_points_to_add
+		-- 			gui.set_text(self.upgrade_buttons_list[j], text)
+		-- 		end
+		-- 	end
+		-- end
 
 		-- if gui.pick_node(self.kocha_face, action.x, action.y) then
 		-- 	it.gloabl_score = it.gloabl_score + 1

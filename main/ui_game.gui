@@ -483,6 +483,25 @@ nodes {
   id: "text_upgrade_9"
   parent: "upgrade_9"
 }
+nodes {
+  position {
+    x: 450.0
+    y: 225.0
+  }
+  size {
+    x: 50.0
+    y: 50.0
+  }
+  color {
+    x: 0.844
+    y: 0.135
+    z: 0.135
+  }
+  type: TYPE_BOX
+  id: "close_upgrade_menu"
+  parent: "upgrade_menu"
+  alpha: 0.8
+}
 layers {
   name: "images"
 }
