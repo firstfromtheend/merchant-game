@@ -1,0 +1,493 @@
+script: "/main/scores_test.gui_script"
+fonts {
+  name: "oswald"
+  font: "/assets/font/oswald.font"
+}
+textures {
+  name: "items"
+  texture: "/assets/images/items.atlas"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "shops_buttons"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 150.0
+    y: 125.0
+  }
+  size {
+    x: 200.0
+    y: 150.0
+  }
+  type: TYPE_BOX
+  texture: "items/61"
+  id: "forest"
+  parent: "shops_buttons"
+  layer: "images"
+  inherit_alpha: true
+  slice9 {
+    x: 50.0
+    y: 50.0
+    z: 50.0
+    w: 50.0
+  }
+}
+nodes {
+  size {
+    x: 150.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "forest"
+  font: "oswald"
+  id: "text_forest"
+  parent: "forest"
+  layer: "text"
+}
+nodes {
+  position {
+    x: 400.0
+    y: 125.0
+  }
+  size {
+    x: 200.0
+    y: 150.0
+  }
+  type: TYPE_BOX
+  texture: "items/61"
+  id: "forge"
+  parent: "shops_buttons"
+  layer: "images"
+  inherit_alpha: true
+  slice9 {
+    x: 50.0
+    y: 50.0
+    z: 50.0
+    w: 50.0
+  }
+}
+nodes {
+  size {
+    x: 150.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "forge"
+  font: "oswald"
+  id: "text_forge"
+  parent: "forge"
+  layer: "text"
+}
+nodes {
+  position {
+    x: 650.0
+    y: 125.0
+  }
+  size {
+    x: 200.0
+    y: 150.0
+  }
+  type: TYPE_BOX
+  texture: "items/61"
+  id: "magical_shop"
+  parent: "shops_buttons"
+  layer: "images"
+  inherit_alpha: true
+  slice9 {
+    x: 50.0
+    y: 50.0
+    z: 50.0
+    w: 50.0
+  }
+}
+nodes {
+  size {
+    x: 150.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "magical shop"
+  font: "oswald"
+  id: "text_magical_shop"
+  parent: "magical_shop"
+  layer: "text"
+}
+nodes {
+  position {
+    x: 900.0
+    y: 125.0
+  }
+  size {
+    x: 200.0
+    y: 150.0
+  }
+  type: TYPE_BOX
+  texture: "items/61"
+  id: "ascension"
+  parent: "shops_buttons"
+  layer: "images"
+  inherit_alpha: true
+  slice9 {
+    x: 50.0
+    y: 50.0
+    z: 50.0
+    w: 50.0
+  }
+}
+nodes {
+  size {
+    x: 150.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "ascension"
+  font: "oswald"
+  id: "text_ascension"
+  parent: "ascension"
+  layer: "text"
+}
+nodes {
+  position {
+    x: 525.0
+    y: 500.0
+  }
+  size {
+    x: 950.0
+    y: 500.0
+  }
+  type: TYPE_BOX
+  texture: "items/61"
+  id: "upgrade_menu"
+  layer: "images"
+  inherit_alpha: true
+  slice9 {
+    x: 50.0
+    y: 50.0
+    z: 50.0
+    w: 50.0
+  }
+  enabled: false
+}
+nodes {
+  position {
+    y: 175.0
+  }
+  size {
+    x: 200.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  id: "label_name"
+  parent: "upgrade_menu"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "\320\243\320\273\321\203\321\207\321\210\320\265\320\275\320\270\321\217"
+  font: "oswald"
+  id: "text_label_name"
+  parent: "label_name"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -325.0
+    y: 85.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "upgrade_1"
+  parent: "upgrade_menu"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "oswald"
+  id: "text_upgrade_1"
+  parent: "upgrade_1"
+}
+nodes {
+  position {
+    x: -325.0
+    y: -30.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "upgrade_2"
+  parent: "upgrade_menu"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "oswald"
+  id: "text_upgrade_2"
+  parent: "upgrade_2"
+}
+nodes {
+  position {
+    x: -325.0
+    y: -150.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "upgrade_3"
+  parent: "upgrade_menu"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "oswald"
+  id: "text_upgrade_3"
+  parent: "upgrade_3"
+}
+nodes {
+  position {
+    y: 85.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "upgrade_4"
+  parent: "upgrade_menu"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "oswald"
+  id: "text_upgrade_4"
+  parent: "upgrade_4"
+}
+nodes {
+  position {
+    y: -30.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "upgrade_5"
+  parent: "upgrade_menu"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "oswald"
+  id: "text_upgrade_5"
+  parent: "upgrade_5"
+}
+nodes {
+  position {
+    y: -150.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "upgrade_6"
+  parent: "upgrade_menu"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "oswald"
+  id: "text_upgrade_6"
+  parent: "upgrade_6"
+}
+nodes {
+  position {
+    x: 325.0
+    y: 85.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "upgrade_7"
+  parent: "upgrade_menu"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "oswald"
+  id: "text_upgrade_7"
+  parent: "upgrade_7"
+}
+nodes {
+  position {
+    x: 325.0
+    y: -30.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "upgrade_8"
+  parent: "upgrade_menu"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "oswald"
+  id: "text_upgrade_8"
+  parent: "upgrade_8"
+}
+nodes {
+  position {
+    x: 325.0
+    y: -150.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "upgrade_9"
+  parent: "upgrade_menu"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "oswald"
+  id: "text_upgrade_9"
+  parent: "upgrade_9"
+}
+layers {
+  name: "images"
+}
+layers {
+  name: "text"
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

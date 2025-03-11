@@ -1,0 +1,16 @@
+go.property('color', vmath.vector4())
+
+function init(self)
+	self.velocity = 300
+	go.set('#sprite', 'tint', self.color)
+end
+
+function update(self, dt)
+	local p = go.get_position()
+	if p.x < -50 then
+		go.delete()
+	else
+		p.x = p.x - self.velocity * dt
+		go.set_position(p)
+	end
+end

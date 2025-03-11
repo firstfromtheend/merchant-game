@@ -1,0 +1,219 @@
+script: "/main/scores_test.gui_script"
+fonts {
+  name: "oswald"
+  font: "/assets/font/oswald.font"
+}
+textures {
+  name: "items"
+  texture: "/assets/images/items.atlas"
+}
+nodes {
+  position {
+    x: 450.0
+    y: 300.0
+  }
+  scale {
+    x: 2.48
+    y: 2.48
+    z: 2.48
+  }
+  size {
+    x: 67.0
+    y: 96.0
+  }
+  type: TYPE_BOX
+  id: "kocha_click"
+  inherit_alpha: true
+  alpha: 0.0
+}
+nodes {
+  type: TYPE_PARTICLEFX
+  id: "coin_kocha_click_particle"
+  parent: "kocha_click"
+  size_mode: SIZE_MODE_AUTO
+  particlefx: "item_get_by_customer"
+  material: "particlefx_gui"
+}
+nodes {
+  type: TYPE_BOX
+  texture: "items/kocha_face"
+  id: "kocha_face"
+  parent: "kocha_click"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 450.0
+    y: 550.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "score"
+  font: "oswald"
+  id: "score_text"
+  inherit_alpha: true
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "upgrades"
+  alpha: 0.0
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 110.0
+    y: 450.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "items/61"
+  id: "upgrade_1"
+  parent: "upgrades"
+  slice9 {
+    x: 30.0
+    y: 30.0
+    z: 30.0
+    w: 30.0
+  }
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "upgrade_1_text"
+  font: "oswald"
+  id: "upgrade_1_text"
+  parent: "upgrade_1"
+}
+nodes {
+  position {
+    x: 450.0
+    y: 460.0
+  }
+  size {
+    x: 200.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  text: "total income"
+  font: "oswald"
+  id: "total_income"
+  inherit_alpha: true
+}
+nodes {
+  size {
+    x: 240.0
+    y: 240.0
+  }
+  type: TYPE_BOX
+  id: "main_gameplay_menu"
+  inherit_alpha: true
+  alpha: 0.0
+}
+nodes {
+  position {
+    x: 1222.0
+    y: 591.0
+  }
+  size {
+    x: 240.0
+    y: 240.0
+  }
+  type: TYPE_BOX
+  texture: "items/61"
+  id: "forge"
+  parent: "main_gameplay_menu"
+  slice9 {
+    x: 30.0
+    y: 30.0
+    z: 30.0
+    w: 30.0
+  }
+}
+nodes {
+  position {
+    x: 1222.0
+    y: 591.0
+  }
+  size {
+    x: 240.0
+    y: 240.0
+  }
+  type: TYPE_BOX
+  texture: "items/61"
+  id: "magic_shop"
+  parent: "main_gameplay_menu"
+  slice9 {
+    x: 30.0
+    y: 30.0
+    z: 30.0
+    w: 30.0
+  }
+}
+nodes {
+  position {
+    x: 1222.0
+    y: 591.0
+  }
+  size {
+    x: 240.0
+    y: 240.0
+  }
+  type: TYPE_BOX
+  texture: "items/61"
+  id: "forest"
+  parent: "main_gameplay_menu"
+  slice9 {
+    x: 30.0
+    y: 30.0
+    z: 30.0
+    w: 30.0
+  }
+}
+nodes {
+  position {
+    x: 876.0
+    y: 307.0
+  }
+  size {
+    x: 240.0
+    y: 240.0
+  }
+  type: TYPE_BOX
+  texture: "items/61"
+  id: "ascentions"
+  parent: "main_gameplay_menu"
+  slice9 {
+    x: 30.0
+    y: 30.0
+    z: 30.0
+    w: 30.0
+  }
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
+particlefxs {
+  name: "item_get_by_customer"
+  particlefx: "/assets/particle/item_get_by_customer.particlefx"
+}
+materials {
+  name: "particlefx_gui"
+  material: "/assets/images/particlefx_gui.material"
+}

@@ -1,0 +1,147 @@
+local it = require('assets.modules.income_timers')
+local data = require('assets.modules.upgrades_data')
+
+function init(self)
+	msg.post('.', 'acquire_input_focus')
+	msg.post("@render:", "clear_color", { color = vmath.vector4(0.52, 0.30, 0.6, 0) } )
+
+	-- sound.play('/sound#bgm', {delay = 0, gain = 1, pan = 0, speed = 1})
+	
+	--self.kocha_face = gui.get_node('kocha_click')
+	--self.score_node = gui.get_node('score_text')
+	self.animation_play = false
+	--gui.set_text(self.score_node, it.gloabl_score)
+
+	--it.calculate_start_data()
+	
+	-- image for clicks
+	--self.kocha_face_image = gui.get_node('kocha_face')
+
+	-- upgrade 1
+	--self.upgrade_1_node = gui.get_node('upgrade_1') -- node to check input on it
+	--self.upgrade_1_text_node = gui.get_node('upgrade_1_text')
+	
+	-- -- set gui data at game start
+	--self.text_for_upgrade_1 = it.upgrades['forest']['upgrade_1'].name .. ' - ' .. it.upgrades['forest']['upgrade_1'].level .. '\nцена - ' .. it.upgrades['forest']['upgrade_1'].base_cost .. '\nдоход - ' .. it.upgrades['forest']['upgrade_1'].base_income
+	--gui.set_text(self.upgrade_1_text_node, self.text_for_upgrade_1)
+
+	--self.coin_particle = gui.get_node('coin_kocha_click_particle')
+
+	self.upgrade_menu_node = gui.get_node('upgrade_menu')
+	self.building_buttons_list = {'forest', 'forge', 'magical_shop', 'ascension'}
+
+	self.upgrade_buttons_list = {}
+	for i = 1, 9 do
+		self.upgrade_buttons_list[i] = gui.get_node('text_upgrade_' .. i)
+	end
+
+	--data.opened_menu['forge'] = true
+	for k, v in pairs(data.opened_menu) do
+		print(k .. '========'.. tostring(v))
+	end
+	
+end
+
+local function GetCurrentScore(self)
+	local score = it.GetScore()
+	gui.set_text(self.score_node, score)
+end
+
+local function make_upgrade(self, upgrade_type, upgrade_index)
+	if it.upgrades[upgrade_type].level > 0 then
+		if it.upgrades[upgrade_type].current_cost <= it.gloabl_score then
+			it.gloabl_score = it.gloabl_score - it.upgrades[upgrade_type].current_cost
+			gui.set_text(self.score_node, it.round_score(it.gloabl_score, 0))
+			it.calculate_score_to_add(upgrade_type)
+
+			local new_text = it.upgrades[upgrade_type].name .. ' - ' 
+			.. it.upgrades[upgrade_type].level .. '\nцена - ' 
+			.. it.upgrades[upgrade_type].current_cost .. '\nдоход - ' 
+			.. it.upgrades[upgrade_type].current_points_to_add
+			local node = gui.get_node('upgrade_' .. upgrade_index .. '_text')
+			
+			gui.set_text(node, new_text)
+			gui.set_text(self.current_income, it.score_to_add)
+		end
+	else
+		if it.upgrades[upgrade_type].base_cost <= it.gloabl_score then
+			it.gloabl_score = it.gloabl_score - it.upgrades[upgrade_type].base_cost
+			gui.set_text(self.score_node, it.round_score(it.gloabl_score, 0))
+			it.calculate_score_to_add(upgrade_type)
+
+			local new_text = it.upgrades[upgrade_type].name .. ' - ' 
+			.. it.upgrades[upgrade_type].level 
+			.. '\nцена - ' .. it.upgrades[upgrade_type].current_cost 
+			.. '\nдоход - ' .. it.upgrades[upgrade_type].current_points_to_add
+			local node = gui.get_node('upgrade_' .. upgrade_index .. '_text')
+
+			gui.set_text(node, new_text)
+			gui.set_text(self.current_income, it.score_to_add)
+		end
+	end
+end
+
+local function on_animate_done(self, node)
+	gui.animate(self.kocha_face_image, 'scale', 1, gui.PLAYBACK_ONCE_PINGPONG, 0.2, 0.0, 
+	function() 
+		self.animation_play = false
+	end
+	)
+end
+
+function close_upgrade_menu()
+	for i = 1, #data.opened_menu do
+		data.opened_menu[i] = false
+	end
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash('touch') and action.pressed then
+
+		for i = 1, #self.building_buttons_list do
+			if gui.pick_node(gui.get_node(self.building_buttons_list[i]), action.x, action.y) then
+
+				for i = 1, #self.building_buttons_list do
+					data.opened_menu[self.building_buttons_list[i]] = false
+				end
+				data.opened_menu[self.building_buttons_list[i]] = true
+				
+				gui.set_enabled(self.upgrade_menu_node, true)
+				local upgrades_data = data.get_upgrades_button_data(self.building_buttons_list[i])
+				for j = 1, upgrades_data['upgrade_counter'] do
+					data.opened_menu[self.building_buttons_list[i]] = true
+					local text = upgrades_data['upgrade_'..j].name .. '\n' .. 
+					'уровень = ' .. upgrades_data['upgrade_'..j].level .. '\n' .. 
+					'цена = ' .. upgrades_data['upgrade_'..j].current_cost .. '\n' .. 
+					'доход = ' .. upgrades_data['upgrade_'..j].current_points_to_add
+					gui.set_text(self.upgrade_buttons_list[j], text)
+				end
+			end
+		end
+
+		-- if gui.pick_node(self.kocha_face, action.x, action.y) then
+		-- 	it.gloabl_score = it.gloabl_score + 1
+		-- 	gui.set_text(self.score_node, it.round_score(it.gloabl_score, 0))
+			
+		-- 	if self.animation_play == false then
+		-- 		self.animation_play = true
+		-- 		gui.animate(self.kocha_face_image, 'scale', 0.7, gui.PLAYBACK_ONCE_PINGPONG, 0.2, 0.0, on_animate_done)
+		-- 	end
+		-- 	gui.play_particlefx(self.coin_particle)
+		-- 	sound.play('/sound#click', {delay = 0, gain = 1, pan = 0, speed = 1})
+		-- end
+		-- for i = 1, #it.upgrades do 
+		-- 	print(i)
+		-- 	local node = gui.get_node('upgrade_' .. i)
+		-- 	if gui.pick_node(node, action.x, action.y) then
+		-- 		make_upgrade(self, 'upgrade_' .. i, i)
+		-- 		sound.play('/sound#click', {delay = 0, gain = 1, pan = 0, speed = 1})
+		-- 	end
+		-- end
+	end
+end
+
+
+function update(self, dt)
+	--GetCurrentScore(self)
+end

@@ -1,0 +1,14 @@
+name: "main"
+instances {
+  id: "micro_kocha_factiry_go"
+  prototype: "/assets/parallax/micro_kocha_factory.go"
+}
+instances {
+  id: "sound"
+  prototype: "/assets/sound/sound.go"
+}
+instances {
+  id: "UI"
+  prototype: "/main/UI.go"
+}
+scale_along_z: 0

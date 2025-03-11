@@ -1,0 +1,33 @@
+local frequency = 7
+local min_y = 20
+local max_y = 580
+
+function init(self)
+	self.timer = 1/frequency
+	math.randomseed(0)
+end
+
+local function clamp(number, min, max)
+	if number < min then
+		return min
+	elseif number > max then
+		return max
+	else
+		return number
+	end
+end
+
+function update(self, dt)
+	self.timer = self.timer - dt
+	if self.timer <= 0 then
+		self.timer = 1/frequency
+		local p = go.get_position()
+		p.x = 950
+		p.y = vmath.lerp(math.random(), min_y, max_y)
+		local component = "#factory"
+		local angle = math.rad(math.random(0, 350))
+		local scale = clamp(math.random(), 0.3, 0.8)
+		local tint = vmath.vector4(math.random(), math.random(), math.random(), 1)
+		factory.create(component, p, vmath.quat_rotation_z(angle), {color = tint}, vmath.vector3(scale, scale, 1))
+	end
+end

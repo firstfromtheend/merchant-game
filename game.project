@@ -1,0 +1,24 @@
+[bootstrap]
+main_collection = /main/main.collectionc
+
+[script]
+shared_state = 1
+
+[display]
+width = 1600
+height = 900
+high_dpi = 1
+
+[android]
+input_method = HiddenInputField
+
+[html5]
+scale_mode = stretch
+
+[project]
+title = clicker template
+dependencies#0 = https://github.com/indiesoftby/defold-yagames/archive/refs/heads/master.zip
+
+[sound]
+gain = 0.3
+

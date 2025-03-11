@@ -1,0 +1,13 @@
+images {
+  image: "/assets/images/icon_coin.png"
+}
+images {
+  image: "/assets/images/kocha_face.png"
+}
+images {
+  image: "/assets/images/bg_image_1x1.png"
+}
+images {
+  image: "/assets/images/61.png"
+}
+extrude_borders: 2
