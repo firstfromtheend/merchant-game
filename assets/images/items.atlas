@@ -10,4 +10,16 @@ images {
 images {
   image: "/assets/images/61.png"
 }
+images {
+  image: "/assets/images/Icon_Setting_Bgm_Off.png"
+}
+images {
+  image: "/assets/images/Icon_Setting_Bgm_On.png"
+}
+images {
+  image: "/assets/images/Icon_Setting_Sound_Off.png"
+}
+images {
+  image: "/assets/images/Icon_Setting_Sound_On.png"
+}
 extrude_borders: 2

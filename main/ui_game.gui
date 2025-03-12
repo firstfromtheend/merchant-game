@@ -207,6 +207,7 @@ nodes {
   type: TYPE_BOX
   id: "label_name"
   parent: "upgrade_menu"
+  layer: "images"
 }
 nodes {
   size {
@@ -223,6 +224,7 @@ nodes {
   font: "oswald"
   id: "text_label_name"
   parent: "label_name"
+  layer: "text"
   inherit_alpha: true
 }
 nodes {
@@ -237,11 +239,12 @@ nodes {
   type: TYPE_BOX
   id: "upgrade_1"
   parent: "upgrade_menu"
+  layer: "images"
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 180.0
+    y: 80.0
   }
   color {
     x: 0.0
@@ -253,6 +256,7 @@ nodes {
   font: "oswald"
   id: "text_upgrade_1"
   parent: "upgrade_1"
+  layer: "text"
 }
 nodes {
   position {
@@ -266,11 +270,12 @@ nodes {
   type: TYPE_BOX
   id: "upgrade_2"
   parent: "upgrade_menu"
+  layer: "images"
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 180.0
+    y: 80.0
   }
   color {
     x: 0.0
@@ -282,6 +287,7 @@ nodes {
   font: "oswald"
   id: "text_upgrade_2"
   parent: "upgrade_2"
+  layer: "text"
 }
 nodes {
   position {
@@ -295,11 +301,12 @@ nodes {
   type: TYPE_BOX
   id: "upgrade_3"
   parent: "upgrade_menu"
+  layer: "images"
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 180.0
+    y: 80.0
   }
   color {
     x: 0.0
@@ -311,6 +318,7 @@ nodes {
   font: "oswald"
   id: "text_upgrade_3"
   parent: "upgrade_3"
+  layer: "text"
 }
 nodes {
   position {
@@ -323,11 +331,12 @@ nodes {
   type: TYPE_BOX
   id: "upgrade_4"
   parent: "upgrade_menu"
+  layer: "images"
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 180.0
+    y: 80.0
   }
   color {
     x: 0.0
@@ -339,6 +348,7 @@ nodes {
   font: "oswald"
   id: "text_upgrade_4"
   parent: "upgrade_4"
+  layer: "text"
 }
 nodes {
   position {
@@ -351,11 +361,12 @@ nodes {
   type: TYPE_BOX
   id: "upgrade_5"
   parent: "upgrade_menu"
+  layer: "images"
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 180.0
+    y: 80.0
   }
   color {
     x: 0.0
@@ -367,6 +378,7 @@ nodes {
   font: "oswald"
   id: "text_upgrade_5"
   parent: "upgrade_5"
+  layer: "text"
 }
 nodes {
   position {
@@ -379,11 +391,12 @@ nodes {
   type: TYPE_BOX
   id: "upgrade_6"
   parent: "upgrade_menu"
+  layer: "images"
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 180.0
+    y: 80.0
   }
   color {
     x: 0.0
@@ -395,6 +408,7 @@ nodes {
   font: "oswald"
   id: "text_upgrade_6"
   parent: "upgrade_6"
+  layer: "text"
 }
 nodes {
   position {
@@ -408,11 +422,12 @@ nodes {
   type: TYPE_BOX
   id: "upgrade_7"
   parent: "upgrade_menu"
+  layer: "images"
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 180.0
+    y: 80.0
   }
   color {
     x: 0.0
@@ -424,6 +439,7 @@ nodes {
   font: "oswald"
   id: "text_upgrade_7"
   parent: "upgrade_7"
+  layer: "text"
 }
 nodes {
   position {
@@ -437,11 +453,12 @@ nodes {
   type: TYPE_BOX
   id: "upgrade_8"
   parent: "upgrade_menu"
+  layer: "images"
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 180.0
+    y: 80.0
   }
   color {
     x: 0.0
@@ -453,6 +470,7 @@ nodes {
   font: "oswald"
   id: "text_upgrade_8"
   parent: "upgrade_8"
+  layer: "text"
 }
 nodes {
   position {
@@ -466,11 +484,12 @@ nodes {
   type: TYPE_BOX
   id: "upgrade_9"
   parent: "upgrade_menu"
+  layer: "images"
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 180.0
+    y: 80.0
   }
   color {
     x: 0.0
@@ -482,6 +501,7 @@ nodes {
   font: "oswald"
   id: "text_upgrade_9"
   parent: "upgrade_9"
+  layer: "text"
 }
 nodes {
   position {
@@ -500,7 +520,86 @@ nodes {
   type: TYPE_BOX
   id: "close_upgrade_menu"
   parent: "upgrade_menu"
+  layer: "images"
   alpha: 0.8
+}
+nodes {
+  position {
+    x: 800.0
+    y: 850.0
+  }
+  size {
+    x: 1600.0
+    y: 100.0
+  }
+  color {
+    x: 0.102
+    y: 0.302
+    z: 0.102
+  }
+  type: TYPE_BOX
+  id: "top_menu"
+  layer: "images"
+}
+nodes {
+  position {
+    x: -780.0
+  }
+  size {
+    x: 400.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  text: "\320\236\321\207\320\272\320\270: 1000000000"
+  font: "oswald"
+  id: "text_score"
+  pivot: PIVOT_W
+  parent: "top_menu"
+  layer: "text"
+}
+nodes {
+  position {
+    x: 700.0
+  }
+  size {
+    x: 80.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  texture: "items/Icon_Setting_Sound_On"
+  id: "music_button"
+  parent: "top_menu"
+  layer: "images"
+}
+nodes {
+  position {
+    x: 550.0
+  }
+  size {
+    x: 80.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  texture: "items/Icon_Setting_Bgm_On"
+  id: "sfx_button"
+  parent: "top_menu"
+  layer: "images"
+}
+nodes {
+  position {
+    x: -350.0
+  }
+  size {
+    x: 400.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  text: "\320\224\320\276\321\205\320\276\320\264/\321\201\320\265\320\272\321\203\320\275\320\264\321\203: 50"
+  font: "oswald"
+  id: "text_income_in_second"
+  pivot: PIVOT_W
+  parent: "top_menu"
+  layer: "text"
 }
 layers {
   name: "images"
