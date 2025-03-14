@@ -76,7 +76,7 @@ end
 
 function INCOMES.GetScore()
 	-- done
-	return INCOMES.round_score(INCOMES.gloabl_score, 1)
+	return INCOMES.round_score(INCOMES.gloabl_score, 2)
 end
 
 function INCOMES.start_global_score_timer()

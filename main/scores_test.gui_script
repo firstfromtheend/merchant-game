@@ -8,9 +8,9 @@ function init(self)
 	sound.play('/sound#bgm', {delay = 0, gain = 1, pan = 0, speed = 1})
 	
 	--self.kocha_face = gui.get_node('kocha_click')
-	--self.score_node = gui.get_node('score_text')
 	self.animation_play = false
-	--gui.set_text(self.score_node, it.gloabl_score)
+	self.score_node = gui.get_node('text_score')
+	-- gui.set_text(self.score_node, it.gloabl_score)
 
 	--it.calculate_start_data()
 	
@@ -124,24 +124,26 @@ end
 function change_audio_status(self, action)
 	if gui.pick_node(self.music_button_node, action.x, action.y) then
 		if self.is_music_playing then
-			-- gui.set_enabled(self.music_button_node, false)
 			self.is_music_playing = false
+			gui.play_flipbook(self.music_button_node, 'Icon_Setting_Bgm_Off')
 			print(self.is_music_playing)
 		else 
-			-- gui.set_enabled(self.music_button_node, false) 
 			self.is_music_playing = true
+			gui.play_flipbook(self.music_button_node, 'Icon_Setting_Bgm_On')
 			print(self.is_music_playing)
 		end
 	end
-
+	
 	if gui.pick_node(self.sfx_button_node, action.x, action.y) then
 		if self.is_sfx_playing then
 			-- gui.set_enabled(self.music_button_node, false)
 			self.is_sfx_playing = false
+			gui.play_flipbook(self.sfx_button_node, 'Icon_Setting_Sound_Off')
 			print(self.is_sfx_playing)
 		else 
 			-- gui.set_enabled(self.music_button_node, false) 
 			self.is_sfx_playing = true
+			gui.play_flipbook(self.sfx_button_node, 'Icon_Setting_Sound_On')
 			print(self.is_sfx_playing)
 		end
 	end
@@ -198,5 +200,5 @@ end
 
 
 function update(self, dt)
-	--GetCurrentScore(self)
+	GetCurrentScore(self)
 end
