@@ -74,9 +74,9 @@ function INCOMES.add_score(score)
 	INCOMES.gloabl_score = INCOMES.round_score(temp_score, 4)
 end
 
-function INCOMES.GetScore()
+function INCOMES.GetScore(numbers_after_dot)
 	-- done
-	return INCOMES.round_score(INCOMES.gloabl_score, 2)
+	return INCOMES.round_score(INCOMES.gloabl_score, numbers_after_dot)
 end
 
 function INCOMES.start_global_score_timer()

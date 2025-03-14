@@ -43,7 +43,7 @@ function init(self)
 end
 
 local function GetCurrentScore(self)
-	local score = it.GetScore()
+	local score = it.GetScore(2)
 	gui.set_text(self.score_node, score)
 end
 
