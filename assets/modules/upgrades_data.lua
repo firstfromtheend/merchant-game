@@ -65,17 +65,17 @@ UPGRADES.opened_menu = {['forest'] = false, ['forge'] = false, ['magical_shop'] 
 
 UPGRADES.multipliers = {cost = 1.15, income = 1.07}
 
+-- done
 function UPGRADES.round_score(number_to_round, number_after_dot)
-	-- done
 	local mul = math.pow(10, number_after_dot)
 	local temp_score = math.floor(number_to_round * mul + 0.5) / mul
 	return temp_score
 end
 
+--done
 function UPGRADES.add_score(score)
-	--done
 	local temp_score = UPGRADES.global_score + UPGRADES.score_to_add
-	UPGRADES.global_score = UPGRADES.round_score(temp_score, 4)
+	UPGRADES.global_score = UPGRADES.round_score(temp_score, 2)
 end
 
 -- done
@@ -83,17 +83,23 @@ function UPGRADES.GetScore(numbers_after_dot)
 	return UPGRADES.round_score(UPGRADES.global_score, numbers_after_dot)
 end
 
+function UPGRADES.GetCurrentIncome(numbers_after_dot)
+	return UPGRADES.round_score(UPGRADES.score_to_add, numbers_after_dot)
+end
+
+-- done
 function UPGRADES.start_global_score_timer()
-	-- done
 	UPGRADES.global_score_timer = timer.delay(UPGRADES.delay_to_global_timer, true, UPGRADES.add_score)
 end
 
+-- done
 function UPGRADES.update_score_to_add()
-	-- done
 	local temp_score = 0
-	for i = 1, #UPGRADES.upgrades do
-		for k, _ in pairs(UPGRADES.opened_menu) do
-			temp_score = temp_score + UPGRADES.upgrades[k]['upgrade_' .. i].current_points_to_add
+	for k, _ in pairs(UPGRADES.upgrades) do
+		if k ~= 'max_levels' then
+			for i = 1, 9 do
+				temp_score = temp_score + UPGRADES.upgrades[k]['upgrade_' .. i].current_points_to_add
+			end
 		end
 	end
 	UPGRADES.score_to_add = UPGRADES.round_score(temp_score, 2)
@@ -116,7 +122,6 @@ function UPGRADES.calculate_start_data()
 			end
 		end
 	end
-	print(UPGRADES.score_to_add)
 	UPGRADES.start_global_score_timer()
 end
 
