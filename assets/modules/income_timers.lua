@@ -2,7 +2,7 @@ local INCOMES = {}
 
 -- оставить округление только для вывода в интерфейс, внутри более точные числа
 
-INCOMES.gloabl_score = 0
+INCOMES.global_score = 0
 INCOMES.score_to_add = 0
 INCOMES.delay_to_global_timer = 1
 INCOMES.global_score_timer = nil
@@ -70,13 +70,13 @@ end
 
 function INCOMES.add_score(score)
 	--done
-	local temp_score = INCOMES.gloabl_score + INCOMES.score_to_add
-	INCOMES.gloabl_score = INCOMES.round_score(temp_score, 4)
+	local temp_score = INCOMES.global_score + INCOMES.score_to_add
+	INCOMES.global_score = INCOMES.round_score(temp_score, 4)
 end
 
 function INCOMES.GetScore(numbers_after_dot)
 	-- done
-	return INCOMES.round_score(INCOMES.gloabl_score, numbers_after_dot)
+	return INCOMES.round_score(INCOMES.global_score, numbers_after_dot)
 end
 
 function INCOMES.start_global_score_timer()
@@ -88,7 +88,7 @@ function INCOMES.update_score_to_add()
 	-- done
 	local temp_score = 0
 	for i = 1, #INCOMES.upgrades do
-		for i =  j , #INCOMES.upgrades[i] do 
+		for j = 1 , #INCOMES.upgrades[i] do
 			temp_score = temp_score + INCOMES.upgrades[i][j].current_points_to_add
 		end
 	end
@@ -106,11 +106,11 @@ function INCOMES.calculate_start_data()
 	INCOMES.start_global_score_timer()
 end
 
-function INCOMES.calculate_score_to_add(bulding_name)
+function INCOMES.calculate_score_to_add(upgrade_name)
 	INCOMES.upgrades[upgrade_name].level = INCOMES.upgrades[upgrade_name].level + 1
 	INCOMES.upgrades[upgrade_name].current_points_to_add = INCOMES.upgrades[upgrade_name].base_income * INCOMES.upgrades[upgrade_name].level
 	local temp_price = INCOMES.upgrades[upgrade_name].base_cost * INCOMES.multipliers.cost ^ (INCOMES.upgrades[upgrade_name].level + 1)
-	INCOMES.upgrades[upgrade_name].current_cost = INCOMES.round_score(temp_score, 0)
+	INCOMES.upgrades[upgrade_name].current_cost = INCOMES.round_score(temp_price, 0)
 	INCOMES.update_score_to_add()
 
 

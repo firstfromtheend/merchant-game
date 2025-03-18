@@ -4,19 +4,19 @@ local data = require('assets.modules.upgrades_data')
 function init(self)
 	msg.post('.', 'acquire_input_focus')
 	msg.post("@render:", "clear_color", { color = vmath.vector4(0.52, 0.30, 0.6, 0) } )
-
+	
 	sound.play('/sound#bgm', {delay = 0, gain = 1, pan = 0, speed = 1})
 	
 	--self.kocha_face = gui.get_node('kocha_click')
 	self.animation_play = false
-	self.score_node = gui.get_node('text_score')
-	-- gui.set_text(self.score_node, it.gloabl_score)
-
-	--it.calculate_start_data()
+	-- gui.set_text(self.score_node, it.global_score)
+	self.building_buttons_list = {'forest', 'forge', 'magical_shop', 'ascension'}
+	
+	data.calculate_start_data()
 	
 	-- image for clicks
 	--self.kocha_face_image = gui.get_node('kocha_face')
-
+	
 	-- upgrade 1
 	--self.upgrade_1_node = gui.get_node('upgrade_1') -- node to check input on it
 	--self.upgrade_1_text_node = gui.get_node('upgrade_1_text')
@@ -24,17 +24,17 @@ function init(self)
 	-- -- set gui data at game start
 	--self.text_for_upgrade_1 = it.upgrades['forest']['upgrade_1'].name .. ' - ' .. it.upgrades['forest']['upgrade_1'].level .. '\nцена - ' .. it.upgrades['forest']['upgrade_1'].base_cost .. '\nдоход - ' .. it.upgrades['forest']['upgrade_1'].base_income
 	--gui.set_text(self.upgrade_1_text_node, self.text_for_upgrade_1)
-
+	
 	--self.coin_particle = gui.get_node('coin_kocha_click_particle')
-
-	self.upgrade_menu_node = gui.get_node('upgrade_menu')
-	self.building_buttons_list = {'forest', 'forge', 'magical_shop', 'ascension'}
-
+	
+	
 	self.upgrade_buttons_list = {}
 	for i = 1, 9 do
 		self.upgrade_buttons_list[i] = gui.get_node('text_upgrade_' .. i)
 	end
 	
+	self.upgrade_menu_node = gui.get_node('upgrade_menu')
+	self.score_node = gui.get_node('text_score')
 	self.music_button_node = gui.get_node('music_button')
 	self.is_music_playing = true
 	self.sfx_button_node = gui.get_node('sfx_button')
@@ -43,43 +43,61 @@ function init(self)
 end
 
 local function GetCurrentScore(self)
-	local score = it.GetScore(2)
-	gui.set_text(self.score_node, score)
+	local score = data.GetScore(0)
+	gui.set_text(self.score_node, 'Очки: ' .. score)
 end
 
-local function make_upgrade(self, upgrade_type, upgrade_index)
-	if it.upgrades[upgrade_type].level > 0 then
-		if it.upgrades[upgrade_type].current_cost <= it.gloabl_score then
-			it.gloabl_score = it.gloabl_score - it.upgrades[upgrade_type].current_cost
-			gui.set_text(self.score_node, it.round_score(it.gloabl_score, 0))
-			it.calculate_score_to_add(upgrade_type)
-
-			local new_text = it.upgrades[upgrade_type].name .. ' - ' 
-			.. it.upgrades[upgrade_type].level .. '\nцена - ' 
-			.. it.upgrades[upgrade_type].current_cost .. '\nдоход - ' 
-			.. it.upgrades[upgrade_type].current_points_to_add
-			local node = gui.get_node('upgrade_' .. upgrade_index .. '_text')
-			
-			gui.set_text(node, new_text)
-			gui.set_text(self.current_income, it.score_to_add)
-		end
-	else
-		if it.upgrades[upgrade_type].base_cost <= it.gloabl_score then
-			it.gloabl_score = it.gloabl_score - it.upgrades[upgrade_type].base_cost
-			gui.set_text(self.score_node, it.round_score(it.gloabl_score, 0))
-			it.calculate_score_to_add(upgrade_type)
-
-			local new_text = it.upgrades[upgrade_type].name .. ' - ' 
-			.. it.upgrades[upgrade_type].level 
-			.. '\nцена - ' .. it.upgrades[upgrade_type].current_cost 
-			.. '\nдоход - ' .. it.upgrades[upgrade_type].current_points_to_add
-			local node = gui.get_node('upgrade_' .. upgrade_index .. '_text')
-
-			gui.set_text(node, new_text)
-			gui.set_text(self.current_income, it.score_to_add)
+local function make_upgrade_2(self, upgrade_name)
+	for k, v in pairs(data.opened_menu) do
+		if v == true then
+			print(k)
+			print(upgrade_name)
+			print(data.upgrades[k][upgrade_name].level)
+			if data.upgrades[k][upgrade_name].current_cost <= data.global_score then
+				data.global_score = data.global_score - data.upgrades[k][upgrade_name].current_cost
+				data.calculate_score_to_add(k, upgrade_name)
+			end
 		end
 	end
 end
+
+-- local function make_upgrade(self, upgrade_index)
+-- 	for k, v in pairs(data.opened_menu) do
+-- 		if v == true then
+-- 			if it.upgrades[k].level > 0 then
+-- 				if it.upgrades[k].current_cost <= it.global_score then
+-- 					it.global_score = it.global_score - it.upgrades[k].current_cost
+-- 					gui.set_text(self.score_node, it.round_score(it.global_score, 0))
+-- 					it.calculate_score_to_add(k)
+		
+-- 					local new_text = it.upgrades[k].name .. ' - ' 
+-- 					.. it.upgrades[k].level .. '\nцена - ' 
+-- 					.. it.upgrades[k].current_cost .. '\nдоход - ' 
+-- 					.. it.upgrades[k].current_points_to_add
+-- 					local node = gui.get_node('upgrade_' .. upgrade_index .. '_text')
+					
+-- 					gui.set_text(node, new_text)
+-- 					gui.set_text(self.current_income, it.score_to_add)
+-- 				end
+-- 			else
+-- 				if it.upgrades[k].base_cost <= it.global_score then
+-- 					it.global_score = it.global_score - it.upgrades[k].base_cost
+-- 					gui.set_text(self.score_node, it.round_score(it.global_score, 0))
+-- 					it.calculate_score_to_add(k)
+		
+-- 					local new_text = it.upgrades[k].name .. ' - ' 
+-- 					.. it.upgrades[k].level 
+-- 					.. '\nцена - ' .. it.upgrades[k].current_cost 
+-- 					.. '\nдоход - ' .. it.upgrades[k].current_points_to_add
+-- 					local node = gui.get_node('upgrade_' .. upgrade_index .. '_text')
+		
+-- 					gui.set_text(node, new_text)
+-- 					gui.set_text(self.current_income, it.score_to_add)
+-- 				end
+-- 			end
+-- 		end
+-- 	end
+-- end
 
 local function on_animate_done(self, node)
 	gui.animate(self.kocha_face_image, 'scale', 1, gui.PLAYBACK_ONCE_PINGPONG, 0.2, 0.0, 
@@ -99,10 +117,9 @@ local function close_upgrade_menu(self, action)
 end
 
 function check_shop_button(self, action)
-	for i = 1, #self.building_buttons_list do
+	for i = 1, 4 do
 		if gui.pick_node(gui.get_node(self.building_buttons_list[i]), action.x, action.y) then
-
-			for i = 1, #self.building_buttons_list do
+			for i = 1, 4 do
 				data.opened_menu[self.building_buttons_list[i]] = false
 			end
 			data.opened_menu[self.building_buttons_list[i]] = true
@@ -154,6 +171,14 @@ function on_input(self, action_id, action)
 		check_shop_button(self, action)
 		close_upgrade_menu(self, action)
 		change_audio_status(self, action)
+		
+		for i = 1, 9 do
+			local node = gui.get_node('upgrade_' .. i)
+			local upgrade_name = 'upgrade_' .. i
+			if gui.pick_node(node, action.x, action.y) then
+				make_upgrade_2(self, upgrade_name)
+			end
+		end
 
 		-- for i = 1, #self.building_buttons_list do
 		-- 	if gui.pick_node(gui.get_node(self.building_buttons_list[i]), action.x, action.y) then
@@ -177,8 +202,8 @@ function on_input(self, action_id, action)
 		-- end
 
 		-- if gui.pick_node(self.kocha_face, action.x, action.y) then
-		-- 	it.gloabl_score = it.gloabl_score + 1
-		-- 	gui.set_text(self.score_node, it.round_score(it.gloabl_score, 0))
+		-- 	it.global_score = it.global_score + 1
+		-- 	gui.set_text(self.score_node, it.round_score(it.global_score, 0))
 			
 		-- 	if self.animation_play == false then
 		-- 		self.animation_play = true
